@@ -18,8 +18,16 @@ const users = new Array(10).fill(0).map((_, i) => ({
   age: Math.floor(Math.random() * 100),
 }))
 
+
 app.get('/users', (req, res) => {
   res.json(users.map(item=>({...item,name:item.name+Date.now()})))
+}) 
+
+app.get('/user', (req, res) => {
+  const userId = req.query.userId;
+  const user = users.find(user=>user.id === userId);
+  if(user)res.json(user);
+  else res.json({})
 }) 
 
 app.listen(8080, () => {
