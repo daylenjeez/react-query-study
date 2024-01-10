@@ -9,6 +9,9 @@ app.use(cors({
 }))
 
 app.use(logger('dev'));
+app.use((req,res,next)=>{
+  setTimeout(next,1000)
+})
 const users = new Array(10).fill(0).map((_, i) => ({
   id: i,
   name: `user${i}`,
@@ -16,7 +19,7 @@ const users = new Array(10).fill(0).map((_, i) => ({
 }))
 
 app.get('/users', (req, res) => {
-  res.json(users)
+  res.json(users.map(item=>({...item,name:item.name+Date.now()})))
 }) 
 
 app.listen(8080, () => {
