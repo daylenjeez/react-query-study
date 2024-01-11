@@ -29,9 +29,9 @@ function Users(){
   
   return ( 
     <ul>
-     {
+{
       data?.map((user:any)=><li key={user.id}>{user.name}</li>)
-     }
+}
   </ul>
   )
 }
